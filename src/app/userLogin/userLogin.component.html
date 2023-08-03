@@ -1,0 +1,35 @@
+<app-header></app-header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 inputArea">
+      <form class="text-center" #myForm="ngForm" (ngSubmit)="login()">
+        <h2 class="">User Login</h2>
+        <div class="example-container">
+
+          <mat-form-field appearance="fill" class="example-full-width my-2 mt-4 ">
+            <mat-label>Enter your Username</mat-label>
+            <input matInput name="username" [(ngModel)]="loginCredentials.username" autocomplete="off" required #uname="ngModel">
+          </mat-form-field>
+          <small *ngIf="uname.invalid&&uname.touched">username field is required</small>
+
+          <mat-form-field appearance="fill" class="example-full-width mb-3">
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="loginCredentials.password" required  autocomplete="off" #pass="ngModel">
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+          <small *ngIf="pass.invalid&&pass.touched">Password field is required</small>
+
+        </div>
+        <button [disabled]="myForm.invalid" mat-raised-button color="accent">Login</button><br><br>
+        <a routerLink="/userSignUp">Don't Have An Account ? Register One</a><br><br>
+        <a routerLink="">Back To Home           &nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+          <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+        </svg></a>
+      </form>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>

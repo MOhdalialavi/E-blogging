@@ -1,0 +1,18 @@
+
+    <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form class="text-center" #addBlogForm="ngForm" (ngSubmit)="addBlog(addBlogForm.value)">
+                <h1 class="m-3 text-center my-4">Add your Blog</h1>
+                <input type="file" placeholder="optional" name="image" class="form-control m-3"
+                    (change)="onselectFile($event)" ngModel>
+                <input class="form-control m-3" type="text" placeholder="Enter the name of your Blog" name="name"
+                    ngModel autocomplete="off" required>
+                <textarea name="" id="" cols="30" rows="10" class="form-control m-3" name="content"
+                    placeholder="Add your Blog here" ngModel required></textarea>
+                <button class="btn btn-outline-primary w-25 my-4" [disabled]="addBlogForm.invalid">Add</button>
+                <button class="btn btn-outline-primary mx-3" type="button"  routerLink="">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>

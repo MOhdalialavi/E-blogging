@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; 
+    font-family: 'Cinzel', serif;
+    background: rgb(219, 227, 253);
+    background: linear-gradient(90deg, 
+    rgb(235, 239, 250) 14%, rgb(241, 252, 234) 100%);}  
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

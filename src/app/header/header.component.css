@@ -1,0 +1,56 @@
+/* CSS File: styles.css */
+
+.navbar {
+  max-width: 100%;
+}
+
+  
+.navbar-nav {
+  align-items: center;
+  margin-left: auto;
+}
+
+.navbar-brand {
+  margin-right: 1rem;
+}
+
+.moreBtn {
+  position: relative;
+  top: 5px;
+}
+h5{
+  background-image: conic-gradient(#553c9a 30%, #ee4b2b 40%, #ee4b2b 70%, #00c2cb 80%, #553c9a);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text
+}
+.text-white.id{
+  
+  position:absolute ;
+  top: 20px;
+  right: 50%;
+}
+
+
+.text-white.nav-item:nth-child(3),
+.text-white.nav-item:nth-child(4) {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+}
+.nav-item:last-child .btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.my-btn{
+  
+  top: 40px;
+	right: 80px;
+  text-decoration: none;
+	
+	border: 3px solid transparent;
+	border-radius: 20px;
+	
+  padding: 2px;
+}

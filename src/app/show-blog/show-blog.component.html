@@ -1,0 +1,100 @@
+<app-header></app-header>
+<div class="container-fluid my-2">
+    <div class="row ">
+        <div class="col-md-10">
+
+            <!-- mat tab group -->
+            <mat-tab-group mat-stretch-tabs>
+              
+
+          <mat-tab label="Blogs">
+            
+                          
+
+                    <!-- blogs list and pagination -->
+                    <div *ngFor="let item of blogList | paginate: { itemsPerPage: 6, currentPage: p }"
+                        class="blogCard  m-4">
+                        <div style="    margin-right: 100px;
+                        display: flex;
+                        flex-direction: row;
+                        align-content: center;
+                        justify-content: space-around;
+                        flex-wrap: nowrap;
+                        align-items: center;" class="" >
+                            <!-- <div class="col-md-1"> -->
+                                <img src="{{item.image}}" class="my-4 img-fluid" alt="">
+                            <!-- </div> -->
+                            
+                                    <div class="card-body">
+                                        <h5 class="card-title my-3">{{item.name}}</h5>
+                                        <h6 class="card-text my-3">
+                                            <fa-icon [icon]="faUser" class="m-2"></fa-icon> {{item.author}}
+                                        </h6>
+                                        <p>{{item.content|wordLimitter: 50}} . . . . . . . . </p>
+                                        <h6>{{item.date|date}}</h6>
+                                        <button class="btn btn-outline-success float-end"
+                                        (click)="readMore(item.id)">Read More</button>
+                                      </div>
+                                    </div>
+                            
+                        <hr class="my-5">
+                    </div>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    <!-- pagination controls -->
+
+                </mat-tab>
+                <mat-tab label="About Us">
+                    <div class="p-5 ">
+                      <mat-icon class="my-3 ">gamepad</mat-icon>
+                        <h4 class="aboutHead">E-magazine </h4>
+                        <p class="aboutUs" style="font-size: 20px;">Welcome to E-magazine, a web application developed using Angular framework. E-magazine provides you with a platform to explore a wide range of blogs, contributed by various authors from around the world.
+                           With E-magazine, you can create a new user account to add your own blog posts and read the captivating content shared by other authors. The user-friendly interface allows you to log in with your unique username and password, granting you access to the vast collection of blogs.
+                          Once logged in, you can not only read blogs but also engage with the authors and fellow readers by leaving comments on the blog posts. E-magazine encourages active participation and interaction within the blogging community.
+                          Whether you are a passionate writer looking to share your thoughts with the world or an avid reader seeking captivating content, E-magazine is the perfect platform for you. Join us today to embark on an exciting journey through the captivating world of blogs and unlock the realm of boundless creativity and knowledge. Happy reading!
+                          
+                          
+                          
+                          
+                          </p>
+                    </div>
+                </mat-tab>
+                <div class="search-container" >  
+                <mat-tab label="search blog" >
+                      <div style="display:flex; flex-direction:row">          
+
+                    <input style="width: -webkit-fill-available;"
+                    
+                      type="text"
+                      placeholder="Search by blog name"
+                      
+                      [formControl]="searchControl"
+                      [matAutocomplete]="auto"
+                      (keyup)="searchs()"
+                      />
+                      
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="search()">
+                      <mat-option *ngFor="let blog of filteredBlogOptions" [value]="blog.name">
+                        {{ blog.name }}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <button mat-button (click)="searchs()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg></button>
+                  
+                    
+                  </div>
+                </mat-tab>
+              </div>
+            </mat-tab-group>
+
+        </div>
+        
+        <div class="col-md-2 author-list-container">
+            <h3>Top 10  Authors</h3>
+            <p *ngFor="let author of famousAuthors">
+              <fa-icon [icon]="faUser" class="m-2"></fa-icon>
+              {{ author }}
+            </p>
+          </div>
+    </div>
+</div>

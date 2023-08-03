@@ -1,0 +1,14 @@
+a:not([href]):not([class]){
+    color:blue;
+    text-decoration: underline;
+    cursor: pointer;
+}  
+.example-form {
+    min-width: 150px;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
