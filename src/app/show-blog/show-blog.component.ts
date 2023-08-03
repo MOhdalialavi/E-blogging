@@ -95,7 +95,7 @@ export class ShowBlogComponent implements OnInit {
   }
 
   readMore(id:number|undefined):void {
-    if (localStorage.getItem("userLoggedIn")) {
+    if (localStorage.getItem("userLoggedIn" || localStorage.getItem("admin"))) {
       this._rout.navigate(['userLogged/viewBlog', id])
     } else {
       this._snackBar.open("Please Login To Read More", "", { duration: 2 * 1000 })

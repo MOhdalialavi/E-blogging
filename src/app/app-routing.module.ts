@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminComponent } from './admin/admin.component';
 import { BlogsResolveGuard } from './blogs-resolve.guard';
 import { NotLoggedInGuard } from './not-logged-in.guard';
 import { ShowBlogComponent } from './show-blog/show-blog.component';
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: "userSignUp",
     component: UserSignUpComponent
+  },
+  {
+    path: 'admin',
+    component:AdminComponent
   }
 ];
 

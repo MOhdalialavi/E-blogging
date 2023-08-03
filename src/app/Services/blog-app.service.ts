@@ -36,11 +36,12 @@ export class BlogAppService {
     return this._http.get<User[]>(this.baseUrl+"users")
     .pipe(retry(1),catchError(this.handleError))
   }
-  
+
   signUpUser(user: object) {
     return this._http.post(this.baseUrl+"users", user)
     .pipe(retry(1),catchError(this.handleError))
   }
+
 
   addBlog(blog: Blog) {
     return this._http.post(this.baseUrl+"blogs", blog)

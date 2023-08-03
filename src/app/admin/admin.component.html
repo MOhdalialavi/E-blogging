@@ -1,0 +1,118 @@
+<app-header></app-header>
+<div>
+<div class="admin-page">
+    <h2> admin page </h2>
+    <div class="section">
+     <h2 class="section-title">Manage Blogs</h2>
+       <div> 
+        <table>
+            <thead>
+              <tr>
+                <th>Author</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of userBlog">
+                <td><h6 class="card-text my-3">
+                    <fa-icon [icon]="faUser" class="m-2"></fa-icon> {{item.author}}
+                </h6></td>
+                <td><h6 class="card-text my-3">
+                   {{item.name}}
+                </h6></td>
+                <td><button mat-button (click)="ViewBlog(item.id)"> View Blog</button></td>
+          <button class="btn btn-outline-danger float-end" (click)="deleteBlog(item.id)">Delete</button>
+          <td> </td>
+              </tr>
+            </tbody>
+          </table>
+       </div>
+
+    
+    
+
+      <!-- Add new Blog form -->
+      <div id="addBlogForm" class="item">
+        <h4>Add New Blog</h4>
+        <label>Blog Title:</label>
+        <input type="text" id="blogTitle" />
+        <br>
+        <label>Blog Content:</label>
+        <textarea id="blogContent"></textarea>
+        <br>
+        <button class="button">Add Blog</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Manage Users</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Author</th>
+          <th>username</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of userBlog">
+          <td><h6 class="card-text my-3">
+              <fa-icon [icon]="faUser" class="m-2"></fa-icon> {{item.author}}
+          </h6></td>
+          <td><h6 class="card-text my-3">
+          <!-- {{nameofuser}} -->
+        </h6></td>
+        <td>
+        <button class="btn btn-outline-danger float-end" (click)="deleteUser(item.id)">Delete</button>
+        </td>    
+    </tr>
+      </tbody>
+    </table>
+     </div>
+
+      <!-- Add new User form -->
+      <div id="addUserForm" class="item">
+        <div class="text-center" [formGroup]="AdduserForm">
+          <h2 class="mt-4">Add new user </h2>
+          <mat-form-field appearance="fill" class="example-full-width mt-4 ">
+            <mat-label>Enter your Name</mat-label>
+            <input matInput placeholder="Eg: Mohammad ali " formControlName="name" required autocomplete="off">
+          </mat-form-field>
+          <p class="float-start text-danger" style="margin-top: -20;"
+            *ngIf="(AdduserFormControl.name.invalid && AdduserFormControl.name.touched)">Enter a valid Name</p>
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Enter your Username</mat-label>
+            <input matInput placeholder="Use only numbers and letters" formControlName="username" required
+              autocomplete="off">
+          </mat-form-field>
+          <p class="float-start text-danger" style="margin-top: -20;"
+            *ngIf="(AdduserFormControl.username.invalid && AdduserFormControl.username.touched)">Enter a valid Username</p>
+          <mat-form-field appearance="fill" class="example-full-width mb-3">
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="example-full-width mb-3">
+            <mat-label>Confirm your password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword">
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+          <p class="float-start text-danger" style="margin-top: -20;" *ngIf="AdduserForm.hasError('passwordMismatch')">
+            Passwords do not match
+          </p>
+          <button (click)="AddUser()" type="submit" [disabled]="AdduserForm.invalid" mat-raised-button color="accent">Add User</button><br><br>
+      </div>
+      </div>
+    
+    
+    </div>

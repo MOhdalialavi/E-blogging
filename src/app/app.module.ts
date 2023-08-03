@@ -17,6 +17,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MaterialModule } from './material/material.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { AdminComponent } from './admin/admin.component';
+import { LocalStorage } from 'ngx-webstorage';
 
 @NgModule({
   declarations: [	
@@ -25,7 +27,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     WordLimitterPipe,
     HeaderComponent,
     UserLoginComponent,
-    UserSignUpComponent
+    UserSignUpComponent,
+    AdminComponent
    ],
   imports: [
     BrowserModule,
