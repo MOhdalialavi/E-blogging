@@ -10,11 +10,11 @@ import { UserSignUpComponent } from './userSignUp/userSignUp.component';
 const routes: Routes = [
   {
     path: "",
-    redirectTo: '/home', pathMatch: 'full',
-    // component: ShowBlogComponent,
-    // resolve: {
-    //   data: BlogsResolveGuard
-    // }
+    // redirectTo: '/home', pathMatch: 'full',
+    component: ShowBlogComponent,
+    resolve: {
+      data: BlogsResolveGuard
+    }
   },{
     path: 'home',
     component: ShowBlogComponent,

@@ -15,10 +15,12 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 })
 export class AdminComponent implements OnInit {
 [x: string]: any;
+  users: User[] = [];
   userBlog: Blog[]=[];
   searchTerm: string='';
   filteredBlogList: Blog[]=[]
-  faUser = faUser
+  faUser = faUser;
+  UserId: string|null="";
   hide = true;
 
 
@@ -49,7 +51,12 @@ export class AdminComponent implements OnInit {
     }
   }
 }
-
+// 
+loadUsers(){
+  this._serv.getUsers().subscribe((User: User[])=>{
+    this.users=User;
+  });
+}
   // signup function when click the signup button
   AddUser() {
     console.log("done")
@@ -69,6 +76,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUserBlog();
+    this.loadUsers();
   }
   loadUserBlog(): void{
     this._serv.getBlogs().subscribe((Blog: Blog[])=>{
@@ -86,9 +94,13 @@ export class AdminComponent implements OnInit {
       })
     }
   }
-  deleteUser(i:number):void{
+  deleteUser(i:any):void{
     if(confirm("are you sure ? ")){
-      // this._serv.de
+      this._serv.deleteUser(this.UserId).subscribe(() => {
+          alert("Deleted Successfully")
+          localStorage.clear()
+          location.replace("") 
+        })
     }
 
   }

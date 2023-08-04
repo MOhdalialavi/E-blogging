@@ -12,5 +12,6 @@ export class Blog {
     content:string=""
     likes:number = 0
     likedUsers:string[]= []
+
 }
 
