@@ -1,48 +1,53 @@
-<app-header></app-header>
-<div class="container">
+
+<div class="signup-container">
   <div class="row">
     <div class="col-md-4"></div>
-    <div class="col-md-4 inputArea">
-      <form class="text-center" [formGroup]="signupForm" (ngSubmit)="signUp()">
-        <h2 class="mt-4">User Sign Up</h2>
-        <mat-form-field appearance="fill" class="example-full-width mt-4 ">
+    <div class="col-md-4 inputArea" style="background-color: #efe9e9b5;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 10%;">
+      <form class="text-center" [formGroup]="signupForm" (ngSubmit)="signUp()" >
+        <h2 class="signup-title " style="color: black;">User Sign Up</h2>
+        <mat-form-field appearance="fill" class="example-full-width mt-4">
           <mat-label>Enter your Name</mat-label>
-          <input matInput placeholder="Eg: Mohammad ali " formControlName="name" required autocomplete="off">
+          <input matInput placeholder="Eg: Mohammad ali" formControlName="name" required autocomplete="off" style="color:#dfe9e5;">
         </mat-form-field>
-        <p class="float-start text-danger" style="margin-top: -20;"
-          *ngIf="(signupFormControl.name.invalid && signupFormControl.name.touched)">Enter a valid Name</p>
-        <mat-form-field appearance="fill" class="example-full-width">
+        <p class="error-msg" *ngIf="signupFormControl.name.invalid && signupFormControl.name.touched">Enter a valid Name</p>
+
+        <mat-form-field appearance="fill" class="example-full-width mb-3">
           <mat-label>Enter your Username</mat-label>
-          <input matInput placeholder="Use only numbers and letters" formControlName="username" required
-            autocomplete="off">
+          <input matInput placeholder="Use only numbers and letters" formControlName="username" required autocomplete="off" style="color:#dfe9e5;">
         </mat-form-field>
-        <p class="float-start text-danger" style="margin-top: -20;"
-          *ngIf="(signupFormControl.username.invalid && signupFormControl.username.touched)">Enter a valid Username</p>
+        <p class="error-msg" *ngIf="signupFormControl.username.invalid && signupFormControl.username.touched">Enter a valid Username</p>
+
         <mat-form-field appearance="fill" class="example-full-width mb-3">
           <mat-label>Enter your password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-          <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" style="color:#dfe9e5;">
+          <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"></button>
         </mat-form-field>
+
         <mat-form-field appearance="fill" class="example-full-width mb-3">
           <mat-label>Confirm your password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword">
-          <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
-            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" style="color:#dfe9e5;">
+          <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"></button>
         </mat-form-field>
-        <p class="float-start text-danger" style="margin-top: -20;" *ngIf="signupForm.hasError('passwordMismatch')">
-          Passwords do not match
-        </p>
-        <button [disabled]="signupForm.invalid" mat-raised-button color="accent">SignUp</button><br><br>
-        <a routerLink="/userLogin">Already Have an Account ? Login</a><br><br>
-        <a routerLink="">Back To Home &nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
-          <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
-        </svg></a>
+        <p class="error-msg" *ngIf="signupForm.hasError('passwordMismatch')">Passwords do not match</p>
+        
+        <button [disabled]="signupForm.invalid" mat-raised-button color="accent" class="signup-button" style="color: #0a0303;">SignUp</button><br>
 
+        <a routerLink="/userLogin" class="link-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="black" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
+            <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+          
+          </svg>
+        </a>
+        <a routerLink="" class="link-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="black" class="bi bi-house" viewBox="0 0 16 16">
+            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+          
+          </svg>
+        </a>
       </form>
     </div>
     <div class="col-md-4"></div>

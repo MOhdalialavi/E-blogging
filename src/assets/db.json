@@ -7,18 +7,6 @@
       "id": 1
     },
     {
-      "name": "Amritha",
-      "username": "Ammu",
-      "password": "ammu",
-      "id": 3
-    },
-    {
-      "name": "Amritha",
-      "username": "Amru",
-      "password": "qwerty123",
-      "id": 4
-    },
-    {
       "name": "ali",
       "username": "Mohd",
       "password": "MOhd",
@@ -33,32 +21,11 @@
       "id": 6
     },
     {
-      "name": "alan",
-      "username": "Alan",
-      "password": "project",
-      "confirmPassword": "project",
-      "id": 7
-    },
-    {
       "name": "ali",
       "username": "arjun",
       "password": "arjun",
       "confirmPassword": "arjun",
       "id": 8
-    },
-    {
-      "name": "jlnkj",
-      "username": "jkhk",
-      "password": "123",
-      "confirmPassword": "123",
-      "id": 9
-    },
-    {
-      "name": "dsvcds",
-      "username": "zvzxc",
-      "password": "123",
-      "confirmPassword": "123",
-      "id": 10
     }
   ],
   "blogs": [
@@ -70,9 +37,15 @@
       "author": "Ali",
       "date": "2023-07-29T18:57:31.485Z",
       "comments": [],
-      "likes": 1,
+      "likes": 7,
       "likedUsers": [
-        "Ali"
+        "Ali",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "id": 2
     }

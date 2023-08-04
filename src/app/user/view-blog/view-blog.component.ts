@@ -21,7 +21,6 @@ export class ViewBlogComponent implements OnInit {
     id: 1,
     likeCount: 0
   };
-
   currentBlogId: number | null = 0;
   currentBlog: Blog | undefined;
   comments: comment[] = [];

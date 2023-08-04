@@ -1,8 +1,11 @@
-<app-header></app-header>
-<div>
+
 <div class="admin-page">
+  <div class="admin-font">
     <h2> admin page </h2>
-    <div class="section">
+  </div>
+  <div class="sidebar">
+      <div class="sidebar-item" (click)="toggleSection('addnewuser')"><h3>Manage Blogs</h3></div>
+    <div *ngIf="sections.addnewuser" class="sidebar-sub-item">
      <h2 class="section-title">Manage Blogs</h2>
        <div> 
         <table>
@@ -29,25 +32,32 @@
             </tbody>
           </table>
        </div>
+       </div>
+        <div class="sidebar-item" (click)="toggleSection('BlogAddshow')"><h3>Add new Blog</h3></div>
+        <div *ngIf="sections.BlogAddshow" class="sidebar-sub-item">
 
-    
-    
-
-      <!-- Add new Blog form -->
-      <div id="addBlogForm" class="item">
+       <div class="item">
         <h4>Add New Blog</h4>
-        <label>Blog Title:</label>
-        <input type="text" id="blogTitle" />
-        <br>
-        <label>Blog Content:</label>
-        <textarea id="blogContent"></textarea>
-        <br>
-        <button class="button">Add Blog</button>
+        <form [formGroup]="addBlogForm"  (ngSubmit)="addBlog(addBlogForm.value)">
+          <label for="blogTitle">Blog Title:</label>
+          <input type="text" id="blogTitle" placeholder="Enter blog title" name="name" formControlName="title" ngModel autocomplete="off" required="" />
+          <br>
+    
+          <label for="image">Blog Image:</label>
+          <input type="file" placeholder="optional" name="image" class=""
+                 (change)="onSelectFile($event)" ngModel formControlName="image">
+          <br>
+    
+          <label for="blogContent">Blog Content:</label>
+          <textarea id="blogContent" formControlName="content"  name="content" placeholder="type your blog here" ngModel required=""></textarea>
+          <br>
+    
+          <button class="btn"  [disabled]="addBlogForm.invalid">Add</button>
+        </form>
       </div>
     </div>
-  </div>
-
-  <div class="section">
+      <div class="sidebar-item" (click)="toggleSection('showUsers')" ><h3>Manage Users</h3></div>
+      <div *ngIf="sections.showUsers" class="sidebar-sub-item">
     <h2 class="section-title">Manage Users</h2>
 
     <table>
@@ -73,7 +83,9 @@
       </tbody>
     </table>
      </div>
-
+     
+      <div class="sidebar-item" (click)="toggleSection('showAddUser')" ><h3>Add new User</h3> </div>
+      <div *ngIf="sections.showAddUser" class="section">
       <div id="addUserForm" class="item">
         <div class="text-center" [formGroup]="AdduserForm">
           <h2 class="mt-4">Add new user </h2>
@@ -95,7 +107,7 @@
             <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
             <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
               [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <!-- <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
             </button>
           </mat-form-field>
           <mat-form-field appearance="fill" class="example-full-width mb-3">
@@ -103,7 +115,7 @@
             <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword">
             <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
               [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <!-- <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
             </button>
           </mat-form-field>
           <p class="float-start text-danger" style="margin-top: -20;" *ngIf="AdduserForm.hasError('passwordMismatch')">
@@ -112,6 +124,8 @@
           <button (click)="AddUser()" type="submit" [disabled]="AdduserForm.invalid" mat-raised-button color="accent">Add User</button><br><br>
       </div>
       </div>
-    
-    
     </div>
+</div>
+</div>
+    
+  

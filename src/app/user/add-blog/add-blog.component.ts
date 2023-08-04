@@ -62,7 +62,7 @@ export class AddBlogComponent implements OnInit {
       this.serv.addBlog(formValues).subscribe(()=>{
         alert("Success")
       })
-      setTimeout(() => {
+      setTimeout(() => {                            
         this._rout.navigateByUrl("")
       }, 1000);
     }

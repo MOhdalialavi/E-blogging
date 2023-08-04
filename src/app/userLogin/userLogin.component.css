@@ -1,6 +1,6 @@
-/* .col-md-4 {
+ /* .col-md-4 {
   background-color: blue;
-} */
+} 
 
 .inputArea{
     margin-top: 5%;
@@ -24,4 +24,48 @@ a:not([href]):not([class]){
 
   small{
     color: red;
+  } */
+  .login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-image: url('Cea_building.png');
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
   }
+  
+  .inputArea {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .login-title {
+    margin-bottom: 20px;
+    color: white;
+  }
+  
+  .error-msg {
+    color: red;
+  }
+  
+  .login-button {
+    margin-top: 20px;
+  }
+  
+  .link-button {
+    display: inline-block;
+    margin-top: 20px;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .link-button svg {
+    margin-right: 10px;
+  }
+  
+  

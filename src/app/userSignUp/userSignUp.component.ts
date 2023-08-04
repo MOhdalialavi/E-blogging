@@ -56,7 +56,8 @@ export class UserSignUpComponent implements OnInit {
       }
     })
   }
+ 
 
   ngOnInit() { }
-
+ 
 }

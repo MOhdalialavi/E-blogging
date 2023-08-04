@@ -1,14 +1,45 @@
-a:not([href]):not([class]){
-    color:blue;
-    text-decoration: underline;
-    cursor: pointer;
-}  
-.example-form {
-    min-width: 150px;
-    max-width: 100%;
-    width: 100%;
+   .signup-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('Cea_building.png');
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
   }
   
-  .example-full-width {
-    width: 100%;
+  .inputArea {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
   }
+  
+  .signup-title {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: white;
+  }
+  
+  .error-msg {
+    color: red;
+    margin-top: -20px;
+  }
+  
+  .signup-button {
+    margin-top: 20px;
+  }
+  
+  .link-button {
+    display: inline-block;
+    margin-top: 20px;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .link-button svg {
+    margin-right: 10px;
+  }
+  

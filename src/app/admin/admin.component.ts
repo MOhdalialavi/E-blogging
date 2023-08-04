@@ -2,12 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Blog } from '../models/blog';
 import { User } from '../models/user';
+import { FormBuilder, NgForm } from '@angular/forms';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-
 import { BlogAppService } from '../Services/blog-app.service';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-
+type Sections={
+  addnewuser: boolean;
+    BlogAddshow: boolean;
+    showUsers:boolean;
+    showAddUser:Boolean;
+};
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -22,12 +27,29 @@ export class AdminComponent implements OnInit {
   faUser = faUser;
   UserId: string|null="";
   hide = true;
+  loggeduserId?:string|null;
+  imageUrl?:string | null |ArrayBuffer;
+  loggedUser?:User
+  addBlogForm:FormGroup;
+   sections: Sections={
+    addnewuser: false,
+    BlogAddshow:false,
+    showUsers:false,
+    showAddUser:false
+  };
 
 
 
   constructor(private _serv: BlogAppService,
     private _rout: Router,
-    private _route: ActivatedRoute) { }
+    private _route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private _http:BlogAppService) { 
+      this.addBlogForm = this.formBuilder.group({
+        title: ['', Validators.required],
+        image: [''],
+        content: ['', Validators.required]
+      }); }
 
   AdduserForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.pattern("^[A-Za-z ]*$")]),
@@ -66,6 +88,8 @@ loadUsers(){
       if(isAlreadyUser==-1){
         this._serv.signUpUser(this.AdduserForm.value).subscribe(()=>{
           alert("success")
+          location.replace('admin')
+
         })
       }else{
         alert("please choose anthor username")
@@ -77,6 +101,10 @@ loadUsers(){
   ngOnInit(): void {
     this.loadUserBlog();
     this.loadUsers();
+    this.loggeduserId=this._route.snapshot.paramMap.get("id");
+    this._http.getUsers().subscribe((res:User[])=>{
+      this.loggedUser=res.find((element:User)=>element.id==this.loggeduserId)
+    })
   }
   loadUserBlog(): void{
     this._serv.getBlogs().subscribe((Blog: Blog[])=>{
@@ -96,10 +124,10 @@ loadUsers(){
   }
   deleteUser(i:any):void{
     if(confirm("are you sure ? ")){
-      this._serv.deleteUser(this.UserId).subscribe(() => {
+      this._serv.deleteUser(i).subscribe(() => {
           alert("Deleted Successfully")
-          localStorage.clear()
-          location.replace("") 
+          location.replace('admin')
+
         })
     }
 
@@ -113,6 +141,49 @@ loadUsers(){
         this._rout.navigate(['userLogged/viewBlog',foundBlog.id]);
       }
   }
+  onSelectFile(event: Event):void{
+   let ev=(event.target as HTMLInputElement)
+   if (ev.files) {
+     let reader = new FileReader()
+     reader.readAsDataURL(ev?.files[0])
+     reader.onload = (event:ProgressEvent<FileReader>) => {
+       if(event.target){
+         this.imageUrl = event.target.result
+       }
+     }
+   }
+ }
+    
+ addBlog(formValues: Blog): void {
+
+  // loggedUser is possibly undefined
+  if (this.loggedUser) {
+    formValues.authorUname = this.loggedUser.username
+    formValues.author = this.loggedUser.name
+    formValues.date = new Date()
+    formValues.comments = []
+    formValues.likes = 0
+    formValues.likedUsers = []
+    if (this.imageUrl == undefined) {
+      formValues.image = "https://www.kindpng.com/picc/m/320-3203444_blog-subscribe-widget-computer-icons-free-download-hd.png"
+    } else {
+      formValues.image = this.imageUrl
+    }
+    this._serv.addBlog(formValues).subscribe(()=>{
+      alert("Success")
+    })
+    setTimeout(() => {                            
+      this._rout.navigateByUrl("")
+    }, 1000);
+  }
 }
- 
+toggleSection(section: keyof Sections):void{
+  this.sections[section]=!this.sections[section];
+}
+
+    
+    
+}
+
+
   
