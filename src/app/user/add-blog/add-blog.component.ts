@@ -46,7 +46,6 @@ export class AddBlogComponent implements OnInit {
   // adding the additional details and image url of the blog and sending post request
   addBlog(formValues: Blog): void {
 
-    // loggedUser is possibly undefined.
     if (this.loggedUser) {
       formValues.authorUname = this.loggedUser.username
       formValues.author = this.loggedUser.name

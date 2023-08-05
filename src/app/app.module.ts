@@ -43,7 +43,7 @@ import { LocalStorage } from 'ngx-webstorage';
     MaterialModule,
     MatMenuModule,
     FormsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

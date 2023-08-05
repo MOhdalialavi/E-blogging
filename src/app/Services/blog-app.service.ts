@@ -4,17 +4,21 @@ import { Router } from '@angular/router';
 import { catchError,map, Observable, retry, throwError } from 'rxjs';
 import { Blog } from '../models/blog';
 import { User } from '../models/user';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlogAppService {
-  // object is posiibly undefined 
+  isLoggedIn() {
+    throw new Error('Method not implemented.');
+  }
+  private isAuthenticated = false;
   
   baseUrl:string="http://localhost:3000/"
 
   constructor(private _http: HttpClient,private _rout: Router,) { }
-
+ 
   checkLocalStorage(){
     if (localStorage.getItem('userLoggedIn')) {
       return true
@@ -97,6 +101,29 @@ export class BlogAppService {
       catchError(this.handleError)
     );
   }
-
+  login(username:string,password:string):Observable<any>{
+    const headers=new HttpHeaders({
+      'Content-Type':'application/json'
+    });
+    const body={
+      username:username,
+      password:password
+    };
+    return this._http.post<any>(this.baseUrl + 'login', body, { headers: headers }).pipe(
+      map((response) => {
+        if (response && response.token) {
+          localStorage.setItem('authToken', response.token);
+          localStorage.setItem('userLoggedIn', 'true'); // Mark user as logged in
+        }
+        return response;
+      }),
+      catchError(this.handleError)
+    );
+  }
+  logout() {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userLoggedIn');
+    this._rout.navigateByUrl('/login'); // Redirect to the login page
+  }
   
 }

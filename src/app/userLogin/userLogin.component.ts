@@ -23,30 +23,38 @@ export class UserLoginComponent {
 
     login() {
       this.serv.getUsers().subscribe((res: User[]) => {
-        if (this.loginCredentials.username === 'admin@gmail' && this.loginCredentials.password === 'Admin') {
+        const currentUser = res.find((element: User) => element.username === this.loginCredentials.username);
+
+      if (!currentUser) {
+        alert('No user found');
+        return;
+      }
+        if (this.loginCredentials.username === 'admin@gmail' && this.loginCredentials.password === 'admin') {
         // this._rout.navigateByUrl("userLogin")
         // Admin login
-        localStorage.setItem("userLoggedIn", "admin")
-              localStorage.setItem("loggedUser", "admin")
-          this._rout.navigateByUrl("/admin");
-        } else if (res.find((element: User) => element.username == this.loginCredentials.username)) {
-          let currentUser = res.find((element: User) => element.username == this.loginCredentials.username)
-          if (currentUser) {
-            if (currentUser.password == this.loginCredentials.password) {
-              localStorage.setItem("userLoggedIn", currentUser.id)
-              localStorage.setItem("loggedUser", currentUser.name)
-              this._snackBar.open("Login success", "", { duration: 2 * 1000 })
-              setTimeout(() => {
-                this._rout.navigateByUrl("")
-              }, 1000);
+        // let currentUser = res.find((element: User) => element.username == this.loginCredentials.username)
+        // if (!currentUser)
+        //   return
+        
+        localStorage.setItem("userLoggedIn", currentUser.id)
+        localStorage.setItem("loggedUser", currentUser.name)
+        localStorage.setItem("isAdmin","true");
+        // localStorage.setItem("userLoggedIn", "admin")
+        //       localStorage.setItem("loggedUser", "admin")
+        this._rout.navigateByUrl("/admin");
+        } else if (currentUser.password === this.loginCredentials.password) {
+          localStorage.setItem('userLoggedIn', currentUser.id);
+          localStorage.setItem('loggedUser', currentUser.name);
+          localStorage.setItem("isAdmin","false")
+          this._snackBar.open('Login success', '', { duration: 2 * 1000 });
+          setTimeout(() => {
+            this._rout.navigateByUrl('');
+          }, 1000);
           } else {
             alert("Wrong password")
           }
-        }
-      } else {
-        alert("No user found")
+        });
       }
-    })
-  }
-}
+    }
+    
 

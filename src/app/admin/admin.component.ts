@@ -7,6 +7,7 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn,
 import { BlogAppService } from '../Services/blog-app.service';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
+
 type Sections={
   addnewuser: boolean;
     BlogAddshow: boolean;
@@ -27,16 +28,27 @@ export class AdminComponent implements OnInit {
   faUser = faUser;
   UserId: string|null="";
   hide = true;
+  userlogged:boolean=false;
   loggeduserId?:string|null;
   imageUrl?:string | null |ArrayBuffer;
   loggedUser?:User
+  loggedUserId?: string | null
   addBlogForm:FormGroup;
+  sidebaropen:boolean=true;
    sections: Sections={
     addnewuser: false,
     BlogAddshow:false,
     showUsers:false,
     showAddUser:false
   };
+  toggleSidebar(): void {
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar) {
+      sidebar.classList.toggle('sidebar-closed');
+    }
+  }
+
+  
 
 
 
@@ -52,13 +64,12 @@ export class AdminComponent implements OnInit {
       }); }
 
   AdduserForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.pattern("^[A-Za-z ]*$")]),
-    username: new FormControl('', [Validators.required, Validators.pattern("^[A-Za-z0-9]*$")]),
+    name: new FormControl('', [Validators.required, Validators.pattern("^[A-Za-z ]*")]),
+    username: new FormControl('', [Validators.required, Validators.pattern("^[A-Za-z0-9]*@")]),
     password: new FormControl('', [Validators.required]),
     confirmPassword: new FormControl('', [Validators.required]),
   },{validators:this.passwordMatchValidator()});
 
-  // to get the controls of form for validation
   get AdduserFormControl() {
     return this.AdduserForm.controls;
   }
@@ -75,13 +86,12 @@ export class AdminComponent implements OnInit {
 }
 // 
 loadUsers(){
-  this._serv.getUsers().subscribe((User: User[])=>{
-    this.users=User;
+  console.log("User loading")
+  this._serv.getUsers().subscribe((data: User[])=>{
+    this.users=data;
   });
 }
-  // signup function when click the signup button
   AddUser() {
-    console.log("done")
     this._serv.getUsers().subscribe((res:User[])=>{
       let allUsers=res
       let isAlreadyUser =allUsers.findIndex((res:User)=>res.username==this.AdduserForm.value.username)
@@ -99,13 +109,14 @@ loadUsers(){
     
 
   ngOnInit(): void {
-    this.loadUserBlog();
-    this.loadUsers();
-    this.loggeduserId=this._route.snapshot.paramMap.get("id");
-    this._http.getUsers().subscribe((res:User[])=>{
-      this.loggedUser=res.find((element:User)=>element.id==this.loggeduserId)
+    this.loggedUserId = this._route.snapshot.paramMap.get("id")
+    this._http.getUsers().subscribe((res: User[]) => {
+      this.loggedUser = res.find((element: User) => element.id == this.loggedUserId)
     })
-  }
+    this.loadUsers()
+    this.loadUserBlog()
+}
+
   loadUserBlog(): void{
     this._serv.getBlogs().subscribe((Blog: Blog[])=>{
       this.userBlog=Blog;
@@ -133,14 +144,13 @@ loadUsers(){
 
   }
   ViewBlog(a:any) {
-    // let currentUser = res.find((element: User) => element.username == this.loginCredentials.username)s
     const foundBlog = this.userBlog.find((blog)=>blog.id==a);
     
-    // Assuming you have a unique identifier for each blog, use it to construct the URL
       if (foundBlog){
         this._rout.navigate(['userLogged/viewBlog',foundBlog.id]);
       }
   }
+
   onSelectFile(event: Event):void{
    let ev=(event.target as HTMLInputElement)
    if (ev.files) {
@@ -156,10 +166,10 @@ loadUsers(){
     
  addBlog(formValues: Blog): void {
 
-  // loggedUser is possibly undefined
-  if (this.loggedUser) {
-    formValues.authorUname = this.loggedUser.username
-    formValues.author = this.loggedUser.name
+  if (localStorage.getItem("isAdmin") == "true") {
+    formValues.name = this.addBlogForm.value.title;
+    formValues.authorUname = "Magzine-editor"
+    formValues.author = "Magzine-editor"
     formValues.date = new Date()
     formValues.comments = []
     formValues.likes = 0
@@ -170,17 +180,46 @@ loadUsers(){
       formValues.image = this.imageUrl
     }
     this._serv.addBlog(formValues).subscribe(()=>{
-      alert("Success")
-    })
-    setTimeout(() => {                            
-      this._rout.navigateByUrl("")
-    }, 1000);
+          alert("Success")
+        })
+    setTimeout(() => {
+      this.sections = {
+        addnewuser: false,
+        BlogAddshow:false,
+        showUsers:false,
+        showAddUser:false
+      };
+          this._rout.navigateByUrl("/admin")
+          location.replace('admin')
+        }, 1000);
   }
-}
-toggleSection(section: keyof Sections):void{
-  this.sections[section]=!this.sections[section];
+
 }
 
+// manageUser()
+
+toggleSection(section: keyof Sections):void{
+  let tog =!this.sections[section];
+  this.sections = {
+    addnewuser: false,
+    BlogAddshow:false,
+    showUsers:false,
+    showAddUser:false
+  };
+  this.sections[section] = tog;  
+}
+tooggleSidebar():void{
+  this.sidebaropen=!this.sidebaropen;
+}
+
+logout():void {
+  if (confirm("Are you sure you want to Logout")) {
+    localStorage.clear();
+    this._serv.logout();
+    this._rout.navigateByUrl('/');
+  }
+  console.log("ok")
+}
     
     
 }

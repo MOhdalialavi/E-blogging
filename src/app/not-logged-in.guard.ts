@@ -12,8 +12,9 @@ export class NotLoggedInGuard implements CanActivate {
     if(!localStorage.getItem("loggedUser")){
       return true;
     }else{
-      this._rout.navigateByUrl("")
+      this._rout.navigateByUrl("userSignUp")
       return false
     }
   }
 }
+

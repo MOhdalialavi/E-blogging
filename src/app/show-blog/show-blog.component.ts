@@ -32,13 +32,16 @@ export class ShowBlogComponent implements OnInit {
   famousAuthors: string[] = [];
   searchTerm: string='';
   filteredBlogList: Blog[]=[]
- 
 
   constructor(private _serv: BlogAppService,
     private _rout: Router,
     private _countServ: CountService,
     private _snackBar: MatSnackBar,
-    private _route: ActivatedRoute) {}
+    private _route: ActivatedRoute) {
+      if (localStorage.getItem("isAdmin") == "true") {
+        this._rout.navigateByUrl("/admin")
+      }
+    }
 
 
   ngOnInit(): void {

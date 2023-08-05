@@ -6,6 +6,8 @@ import { NotLoggedInGuard } from './not-logged-in.guard';
 import { ShowBlogComponent } from './show-blog/show-blog.component';
 import { UserLoginComponent } from './userLogin/userLogin.component';
 import { UserSignUpComponent } from './userSignUp/userSignUp.component';
+import { NotLoggedInResolver } from './NotLoggedInResolver'; // Update the path
+
 
 const routes: Routes = [
   {
@@ -26,7 +28,7 @@ const routes: Routes = [
   {
     path: 'userLogin',
     component: UserLoginComponent,
-    canActivate:[NotLoggedInGuard]
+    // canActivate:[NotLoggedInGuard]
   },
   {
     path: 'userLogged',
@@ -39,8 +41,12 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component:AdminComponent
-  }
+    // canActivate: [NotLoggedInGuard], // Use NotLoggedInGuard
+    resolve: {
+      data: NotLoggedInResolver
+    },
+    component: AdminComponent,
+  },
 ];
 
 @NgModule({

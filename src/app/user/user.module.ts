@@ -20,6 +20,7 @@ console.log("Lazy Load");
     ViewBlogComponent,
     MyBlogsComponent,
     WordLimitterPipe
+    
   ],
   imports: [
     CommonModule,
