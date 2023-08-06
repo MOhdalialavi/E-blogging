@@ -3,7 +3,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 20px;
-    background-color: #ccc;
+    background-color: #e4d8d88a;
   }
   .blogCard img {
     width: 350px;
@@ -62,8 +62,9 @@
     color: #555;
   }
   
+  
   .mat-tab-group {
-    background-color: #fff;
+    /* background-color: #fff; */
     border: 1px solid #ccc;
     border-radius: 4px;
   }
@@ -71,8 +72,11 @@
     margin-left: 20px;
   }
 
- .my-2{
-    background-color: gray;
+ .contain{
+    background-image: url('hi.jpg');
+  
+    background-size: cover;
+    background-repeat: no-repeat;
   }
   .mx-3{
     background-color: #ccc;
@@ -80,8 +84,7 @@
 
 
 .author-list-container {
-  
-  background-color: #f3efe7;
+  background-color: #f3efe75c;
   box-shadow: 0 0 10px rgba(95, 6, 6, 0.2);
 }
 

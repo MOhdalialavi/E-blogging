@@ -32,7 +32,6 @@
           <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"></button>
         </mat-form-field>
         <p class="error-msg" *ngIf="signupForm.hasError('passwordMismatch')">Passwords do not match</p>
-        
         <button [disabled]="signupForm.invalid" mat-raised-button color="accent" class="signup-button" style="color: #0a0303;">SignUp</button><br>
 
         <a routerLink="/userLogin" class="link-button">

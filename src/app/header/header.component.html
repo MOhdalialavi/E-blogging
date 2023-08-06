@@ -1,6 +1,6 @@
-<nav class="navbar  navbar-expand-sm navbar-dark p-3" style="background-color: rgba(26, 18, 139, 0.39);">
-  <mat-icon class="me-3 text-white" routerLink="" style="cursor: pointer;">gamepad</mat-icon>
-  <h1 class="navbar-brand mt-1" routerLink="" style="cursor: pointer;">E-Magazine</h1>
+<nav class="navbar  navbar-expand-sm navbar-dark p-3" style="background-color: rgba(71, 54, 147, 0.39); height: 15%;">
+  <mat-icon class="me-3 text-white" routerLink="" style="cursor: pointer; color: black;">gamepad</mat-icon>
+  <h1 class="navbar-brand mt-1" routerLink="" style="cursor: pointer; color: black; font-size:x-large; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">E-Magazine</h1>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -29,7 +29,7 @@
         </div>
       </li>
       <li class="nav-item active">
-        <h5 class="text-white id" style="margin-left: 30rem" *ngIf="userlogged">Welcome {{nameOfloggedUser}}</h5>
+        <h5 class="text-white id" style="margin-left: 30rem; font-size: x-large; position: absolute; color: black;"  *ngIf="userlogged" >Welcome {{nameOfloggedUser}}</h5>
       </li>
       <li class="text-white nav-item" style="position: absolute; right: 20%; top: 15px;">
         Number of Blogs : {{countOfBlogs}}

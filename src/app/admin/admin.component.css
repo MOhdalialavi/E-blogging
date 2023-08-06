@@ -46,9 +46,9 @@ body {
 
 /* Sidebar styles */
 .sidebar {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgb(0 0 0 / 0%);
   color: white;
-  padding: 20px;
+  padding: 10px;
 }
 
 .sidebar-item {
@@ -106,7 +106,8 @@ th, td {
 }
 .header {
   background-image: url('college.png');
-  height: 20%;
+  height: 24%;
+  width: 100%;
  background-size: cover;
   color: white;
   text-align: center;
@@ -137,12 +138,12 @@ th, td {
 }
 
 .contact-address {
-  margin-top: 5px;
   color: black;
-  margin-left: 0%;
-  display: flex;
-  justify-content: left;
-  align-items: left;
+  margin-top: 6%;
+    margin-left: 80%;
+    display: flex;
+    margin-bottom: 10px;
+    white-space: pre;
 }
 
 .contact-address p {

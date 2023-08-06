@@ -9,12 +9,15 @@
 
                 <div style="margin-top: 30px;">
             <h1 class="d-inline">{{currentBlog?.name}}</h1>
-            <img class="mt-0" src="{{currentBlog?.image}}" style="   width: 40%;
-            display: inline-block;
-            position: absolute;
-            
-            top: 10%;
-            left: 55%; " alt="">
+            <img class="mt-0" src="{{currentBlog?.image}}" style="
+            width: 50%;
+         margin-top: auto;
+        display: inline-block;
+        position: absolute;
+        top: 15%;
+        left: 55%;
+        height: -webkit-fill-available;
+             " alt="">
             <p>
                 <fa-icon [icon]="faUser" class="m-2"></fa-icon>{{currentBlog?.author}}
             </p>
