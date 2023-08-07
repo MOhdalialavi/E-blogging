@@ -30,17 +30,9 @@ export class UserLoginComponent {
         return;
       }
         if (this.loginCredentials.username === 'admin@gmail' && this.loginCredentials.password === 'admin') {
-        // this._rout.navigateByUrl("userLogin")
-        // Admin login
-        // let currentUser = res.find((element: User) => element.username == this.loginCredentials.username)
-        // if (!currentUser)
-        //   return
-        
         localStorage.setItem("userLoggedIn", currentUser.id)
         localStorage.setItem("loggedUser", currentUser.name)
         localStorage.setItem("isAdmin","true");
-        // localStorage.setItem("userLoggedIn", "admin")
-        //       localStorage.setItem("loggedUser", "admin")
         this._rout.navigateByUrl("/admin");
         } else if (currentUser.password === this.loginCredentials.password) {
           localStorage.setItem('userLoggedIn', currentUser.id);

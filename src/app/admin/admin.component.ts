@@ -6,13 +6,13 @@ import { FormBuilder, NgForm } from '@angular/forms';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { BlogAppService } from '../Services/blog-app.service';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-
-
+import { Observable } from 'rxjs';
 type Sections={
   addnewuser: boolean;
     BlogAddshow: boolean;
     showUsers:boolean;
     showAddUser:Boolean;
+    showPendingBlogs:boolean;
 };
 @Component({
   selector: 'app-admin',
@@ -34,12 +34,14 @@ export class AdminComponent implements OnInit {
   loggedUser?:User
   loggedUserId?: string | null
   addBlogForm:FormGroup;
+  pendingBlogs:any=[];
   sidebaropen:boolean=true;
    sections: Sections={
     addnewuser: false,
     BlogAddshow:false,
     showUsers:false,
-    showAddUser:false
+    showAddUser:false,
+    showPendingBlogs:false,
   };
   toggleSidebar(): void {
     const sidebar = document.querySelector('.sidebar');
@@ -47,11 +49,6 @@ export class AdminComponent implements OnInit {
       sidebar.classList.toggle('sidebar-closed');
     }
   }
-
-  
-
-
-
   constructor(private _serv: BlogAppService,
     private _rout: Router,
     private _route: ActivatedRoute,
@@ -84,7 +81,6 @@ export class AdminComponent implements OnInit {
     }
   }
 }
-// 
 loadUsers(){
   console.log("User loading")
   this._serv.getUsers().subscribe((data: User[])=>{
@@ -106,9 +102,8 @@ loadUsers(){
       }
     })
   }
-    
-
   ngOnInit(): void {
+    this.loadPendingBlogs();
     this.loggedUserId = this._route.snapshot.paramMap.get("id")
     this._http.getUsers().subscribe((res: User[]) => {
       this.loggedUser = res.find((element: User) => element.id == this.loggedUserId)
@@ -187,7 +182,8 @@ loadUsers(){
         addnewuser: false,
         BlogAddshow:false,
         showUsers:false,
-        showAddUser:false
+        showAddUser:false,
+        showPendingBlogs:false,
       };
           this._rout.navigateByUrl("/admin")
           location.replace('admin')
@@ -195,16 +191,14 @@ loadUsers(){
   }
 
 }
-
-// manageUser()
-
 toggleSection(section: keyof Sections):void{
   let tog =!this.sections[section];
   this.sections = {
     addnewuser: false,
     BlogAddshow:false,
     showUsers:false,
-    showAddUser:false
+    showAddUser:false,
+    showPendingBlogs:false,
   };
   this.sections[section] = tog;  
 }
@@ -219,9 +213,32 @@ logout():void {
     this._rout.navigateByUrl('/');
   }
   console.log("ok")
+  }
+
+loadPendingBlogs():void{
+  this._serv.getpendingblogs().subscribe((data)=>{
+  this.pendingBlogs = data
+  }); 
+  // console.log(this.pendingBlogs)
 }
-    
-    
+
+approveBlog(blog:Blog):void{
+  this.loadUserBlog();
+  blog.status='approved';
+  this._serv.approvedBlog(blog).subscribe(()=>{
+  this.rejectBlog(blog)
+  this._rout.navigateByUrl("/admin");
+  }); 
+} 
+rejectBlog(blog:Blog):void{
+  console.log('hee')
+  blog.status='rejected'
+  this._serv.rejectBlog(blog).subscribe(()=>{
+  this.loadPendingBlogs();
+  this._rout.navigateByUrl("/admin");
+
+  })
+}   
 }
 
 
