@@ -6,7 +6,6 @@ import { FormBuilder, NgForm } from '@angular/forms';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { BlogAppService } from '../Services/blog-app.service';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { Observable } from 'rxjs';
 type Sections={
   addnewuser: boolean;
     BlogAddshow: boolean;
@@ -132,7 +131,7 @@ loadUsers(){
     if(confirm("are you sure ? ")){
       this._serv.deleteUser(i).subscribe(() => {
           alert("Deleted Successfully")
-          location.replace('admin')
+          // location.replace('admin')
 
         })
     }
@@ -170,7 +169,7 @@ loadUsers(){
     formValues.likes = 0
     formValues.likedUsers = []
     if (this.imageUrl == undefined) {
-      formValues.image = "https://www.kindpng.com/picc/m/320-3203444_blog-subscribe-widget-computer-icons-free-download-hd.png"
+      formValues.image = "https://cdn.dribbble.com/userupload/4390643/file/original-27fb59109656888382920a85dcb00ef5.png?resize=1200x900"
     } else {
       formValues.image = this.imageUrl
     }
@@ -228,14 +227,17 @@ approveBlog(blog:Blog):void{
   this._serv.approvedBlog(blog).subscribe(()=>{
   this.rejectBlog(blog)
   this._rout.navigateByUrl("/admin");
+  location.replace('admin')
+
   }); 
 } 
 rejectBlog(blog:Blog):void{
-  console.log('hee')
   blog.status='rejected'
   this._serv.rejectBlog(blog).subscribe(()=>{
   this.loadPendingBlogs();
   this._rout.navigateByUrl("/admin");
+  location.replace('admin')
+
 
   })
 }   

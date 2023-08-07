@@ -69,7 +69,6 @@ export class BlogAppService {
   }
 
   approvedBlog(blog: Blog): Observable<any> {
-    // const data=this._http.get<any>(`${this.baseUrl}Pending-blogs`);
     return this._http.post<Blog>(`${this.baseUrl}blogs`, blog)
     .pipe(
       catchError(this.handleError)

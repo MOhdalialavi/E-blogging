@@ -107,3 +107,17 @@ a {
 a:hover {
   color: #007bff;
 }
+.custom-pagination ::ng-deep ul.pagination li.disabled a {
+  color: black !important; /* Color for disabled pagination links */
+}
+
+.custom-pagination ::ng-deep ul.pagination li.previous a,
+.custom-pagination ::ng-deep ul.pagination li.next a {
+  color: white !important; /* Color for enabled pagination links */
+  background-color: #007bff; /* Add your desired background color */
+}
+
+.custom-pagination ::ng-deep ul.pagination li.previous a:hover,
+.custom-pagination ::ng-deep ul.pagination li.next a:hover {
+  text-decoration: none;
+}

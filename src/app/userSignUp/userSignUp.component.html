@@ -8,27 +8,27 @@
     margin-top: 10%;">
       <form class="text-center" [formGroup]="signupForm" (ngSubmit)="signUp()" >
         <h2 class="signup-title " style="color: black;">User Sign Up</h2>
-        <mat-form-field appearance="fill" class="example-full-width mt-4">
+        <mat-form-field appearance="fill" class="example-full-width mt-4" style="color: #000;">
           <mat-label>Enter your Name</mat-label>
-          <input matInput placeholder="Eg: Mohammad ali" formControlName="name" required autocomplete="off" style="color:#dfe9e5;">
+          <input matInput placeholder=" Name " formControlName="name" required autocomplete="off" >
         </mat-form-field>
         <p class="error-msg" *ngIf="signupFormControl.name.invalid && signupFormControl.name.touched">Enter a valid Name</p>
 
         <mat-form-field appearance="fill" class="example-full-width mb-3">
           <mat-label>Enter your Username</mat-label>
-          <input matInput placeholder="Use only numbers and letters" formControlName="username" required autocomplete="off" style="color:#dfe9e5;">
+          <input matInput placeholder="Use only numbers and letters" formControlName="username" required autocomplete="off" >
         </mat-form-field>
         <p class="error-msg" *ngIf="signupFormControl.username.invalid && signupFormControl.username.touched">Enter a valid Username</p>
 
         <mat-form-field appearance="fill" class="example-full-width mb-3">
           <mat-label>Enter your password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" style="color:#dfe9e5;">
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" >
           <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"></button>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="example-full-width mb-3">
           <mat-label>Confirm your password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" style="color:#dfe9e5;">
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" >
           <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"></button>
         </mat-form-field>
         <p class="error-msg" *ngIf="signupForm.hasError('passwordMismatch')">Passwords do not match</p>

@@ -41,7 +41,7 @@
     <div class="sidebar-item" (click)="toggleSection('showPendingBlogs')">
       <h3><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="white" class="bi bi-hourglass-split" viewBox="0 0 16 16">
         <path d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2h-7zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48V8.35zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z"/>
-      </svg> Blog status</h3>
+      </svg> Moderate Blogs </h3>
     </div>
   </div>
   </div>
@@ -105,7 +105,7 @@
           <label for="blogContent">Blog Content:</label>
           <textarea id="blogContent" formControlName="content" name="content" placeholder="type your blog here" ngModel required=""></textarea>
           <br>
-          <button class="btn" [disabled]="addBlogForm.invalid">Add</button>
+          <button class="btn btn-p" [disabled]="addBlogForm.invalid">Add</button>
         </form>
       </div>
     </div>
@@ -139,10 +139,10 @@
                 </h5>
               </td>
               <td>
-                <button class="btn  float-end" mat-button (click)="ViewBlog(item.id)"> View Blog</button>
+                <button class="btn  float-end btn-success" mat-button (click)="ViewBlog(item.id)"> View Blog</button>
               </td>
               <td>
-              <button class="btn btn-outline-danger float-end" (click)="deleteBlog(item.id)">Delete</button>
+              <button class="btn btn-outline-danger float-end btn-danger" (click)="deleteBlog(item.id)">Delete</button>
               </td>
             </tr>
           </tbody>
@@ -175,7 +175,7 @@
               </h6>
             </td>
             <td>
-              <button class="btn btn-outline-danger float-end" (click)="deleteUser(item.id)">Delete</button>
+              <button class="btn btn-outline-danger float-end btn-p"(click)="deleteUser(item.id)">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -186,7 +186,6 @@
   <div *ngIf="sections.showPendingBlogs" class="sidebar-sub-item" style="
   padding: 20px;
   border-radius: 10px;
-  /* margin-bottom: 20px; */
   margin-left: 30%;
   padding: 20px 40px 50px 30px;
   display: flex;
@@ -195,10 +194,17 @@
   justify-content: space-around;
   align-items: center;
   font-size: xx-large;
-  margin-top: 30px;">
-    <div class="item">
-      <h4>Pending Blogs</h4>
-      <table class="table">
+  margin-top: 30px;
+  
+">
+    <div class="item" style="background-color: rgb(169 39 39 / 37%);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;">
+      <h4 style="size: 50px;">Pending Blogs</h4>
+  <table class="table">
         <thead>
           <tr>
             <th>Title</th>
@@ -208,7 +214,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let blog of pendingBlogs">
-            <td>{{ blog.name }}</td>
+            <td style="white-space: pre;">{{ blog.name }}</td>
           <td>{{ blog.status }}</td>
           <td>
             <button class="btn btn-success" (click)="approveBlog(blog)">Approve</button>

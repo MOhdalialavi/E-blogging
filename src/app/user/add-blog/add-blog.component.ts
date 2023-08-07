@@ -56,7 +56,8 @@ export class AddBlogComponent implements OnInit {
       formValues.likedUsers = [];
       formValues.status = 'pending'; // Add the status property
       if (this.imageUrl == undefined) {
-        formValues.image = "https://www.kindpng.com/picc/m/320-3203444_blog-subscribe-widget-computer-icons-free-download-hd.png";
+        formValues.image = "https://cdn.dribbble.com/userupload/4390643/file/original-27fb59109656888382920a85dcb00ef5.png?resize=1200x900";
+        // https://www.kindpng.com/picc/m/320-3203444_blog-subscribe-widget-computer-icons-free-download-hd.png";
       } else {
         formValues.image = this.imageUrl;
       }

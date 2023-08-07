@@ -91,9 +91,11 @@ th, td {
   padding: 10px;
   text-align: left;
 }
-
-.btn {
+.btn-p{
+   
   background-color: #007bff;
+}
+.btn {
   color: white;
   border: none;
   padding: 8px 20px;
@@ -149,7 +151,6 @@ th, td {
 .contact-address p {
   margin: 0 10px;
 }
-/* Styles for the menu icon */
 .menu-icon {
   cursor: pointer;
   font-size: 24px;
@@ -159,21 +160,17 @@ th, td {
   text-overflow: ellipsis;
 }
 
-/* Styles to close the sidebar */
 .sidebar-closed {
-  width: 70px; /* Adjust the width as needed */
+  width: 70px; 
 }
 
-/* Optional: Smooth transition for sidebar animation */
 .sidebar {
   transition: width 0.3s ease;
 }
-/* Styles to close the sidebar */
 .sidebar-closed {
-  width: 70px; /* Adjust the width as needed */
+  width: 70px; 
 }
 
-/* Adjust the padding or margin of sidebar content when closed */
 .sidebar-closed .sidebar-item {
-  padding-left: 5px; /* Adjust the padding as needed */
+  padding-left: 5px; 
 }
